@@ -1,6 +1,5 @@
 ﻿// File: EnumExtensionsTests.cs
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using vz.Extensions;
 
 namespace vz.UnitTest.Extensions

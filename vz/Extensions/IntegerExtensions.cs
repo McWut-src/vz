@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace vz.Extensions
+﻿namespace vz.Extensions
 {
     public static class IntegerExtensions
     {

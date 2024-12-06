@@ -12,9 +12,9 @@ namespace vz.UnitTest.Extensions
             // Arrange
             var items = new[]
             {
-                new { Name = "Alice", Age = 30 },
-                new { Name = "Bob", Age = 25 }
-            };
+            new { Name = "Alice", Age = 30 },
+            new { Name = "Bob", Age = 25 }
+        };
 
             // Act
             var result = items.ToCsv().ToArray();
@@ -32,8 +32,8 @@ namespace vz.UnitTest.Extensions
             // Arrange
             var items = new[]
             {
-                new { Description = "Hello, World!", Value = 100 }
-            };
+            new { Description = "Hello, World!", Value = 100 }
+        };
 
             // Act
             var result = items.ToCsv().ToArray();
@@ -50,8 +50,8 @@ namespace vz.UnitTest.Extensions
             // Arrange
             var items = new[]
             {
-                new { Name = "Charlie", Score = 95 }
-            };
+            new { Name = "Charlie", Score = 95 }
+        };
 
             // Act
             var result = items.ToCsv(includeHeader: false).ToArray();
