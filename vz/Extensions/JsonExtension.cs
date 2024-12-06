@@ -7,12 +7,12 @@ namespace vz.Extensions
     public static class JsonExtensions
     {
         /// <summary>
-        /// Converts an <see cref="IEnumerable{T}"/> to a JSON string representation of an array.
+        /// Converts an <see cref="IEnumerable{T}" /> to a JSON string representation of an array.
         /// </summary>
-        /// <typeparam name="T">The type of elements in the collection.</typeparam>
-        /// <param name="source">The source collection to convert. Cannot be null.</param>
-        /// <returns>A JSON string where each element from the source is an object or value in a JSON array.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when the source collection is null.</exception>
+        /// <typeparam name="T"> The type of elements in the collection. </typeparam>
+        /// <param name="source"> The source collection to convert. Cannot be null. </param>
+        /// <returns> A JSON string where each element from the source is an object or value in a JSON array. </returns>
+        /// <exception cref="ArgumentNullException"> Thrown when the source collection is null. </exception>
         /// <remarks>
         /// - Strings are properly escaped for JSON compatibility.
         /// - Booleans are converted to lowercase.
@@ -120,5 +120,4 @@ namespace vz.Extensions
             return "{" + string.Join(",", jsonProperties) + "}";
         }
     }
-
 }

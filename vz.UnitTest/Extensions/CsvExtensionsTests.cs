@@ -7,44 +7,6 @@ namespace vz.UnitTest.Extensions
     public class CsvExtensionsTests
     {
         [TestMethod]
-        public void ToCsv_WithBasicTypes_ShouldProduceCorrectCsv()
-        {
-            // Arrange
-            var items = new[]
-            {
-            new { Name = "Alice", Age = 30 },
-            new { Name = "Bob", Age = 25 }
-        };
-
-            // Act
-            var result = items.ToCsv().ToArray();
-
-            // Assert
-            Assert.AreEqual(3, result.Length); // Header + 2 rows
-            Assert.AreEqual("Name,Age", result[0]); // Header
-            Assert.AreEqual("Alice,30", result[1]);
-            Assert.AreEqual("Bob,25", result[2]);
-        }
-
-        [TestMethod]
-        public void ToCsv_WithCommaInData_ShouldEscapeCorrectly()
-        {
-            // Arrange
-            var items = new[]
-            {
-            new { Description = "Hello, World!", Value = 100 }
-        };
-
-            // Act
-            var result = items.ToCsv().ToArray();
-
-            // Assert
-            Assert.AreEqual(2, result.Length);
-            Assert.AreEqual("Description,Value", result[0]); // Header
-            Assert.AreEqual("\"Hello, World!\",100", result[1]); // Escaped comma in data
-        }
-
-        [TestMethod]
         public void ToCsv_WhenIncludeHeaderIsFalse_ShouldNotIncludeHeader()
         {
             // Arrange
@@ -54,7 +16,7 @@ namespace vz.UnitTest.Extensions
         };
 
             // Act
-            var result = items.ToCsv(includeHeader: false).ToArray();
+            string[] result = items.ToCsv(includeHeader: false).ToArray();
 
             // Assert
             Assert.AreEqual(1, result.Length);
@@ -73,13 +35,51 @@ namespace vz.UnitTest.Extensions
         }
 
         [TestMethod]
+        public void ToCsv_WithBasicTypes_ShouldProduceCorrectCsv()
+        {
+            // Arrange
+            var items = new[]
+            {
+            new { Name = "Alice", Age = 30 },
+            new { Name = "Bob", Age = 25 }
+        };
+
+            // Act
+            string[] result = items.ToCsv().ToArray();
+
+            // Assert
+            Assert.AreEqual(3, result.Length); // Header + 2 rows
+            Assert.AreEqual("Name,Age", result[0]); // Header
+            Assert.AreEqual("Alice,30", result[1]);
+            Assert.AreEqual("Bob,25", result[2]);
+        }
+
+        [TestMethod]
+        public void ToCsv_WithCommaInData_ShouldEscapeCorrectly()
+        {
+            // Arrange
+            var items = new[]
+            {
+            new { Description = "Hello, World!", Value = 100 }
+        };
+
+            // Act
+            string[] result = items.ToCsv().ToArray();
+
+            // Assert
+            Assert.AreEqual(2, result.Length);
+            Assert.AreEqual("Description,Value", result[0]); // Header
+            Assert.AreEqual("\"Hello, World!\",100", result[1]); // Escaped comma in data
+        }
+
+        [TestMethod]
         public void ToCsv_WithEmptyCollection_ShouldReturnOnlyHeader()
         {
             // Arrange
-            var emptyList = Enumerable.Empty<object>();
+            IEnumerable<object> emptyList = Enumerable.Empty<object>();
 
             // Act
-            var result = emptyList.ToCsv(includeHeader: true).ToArray();
+            string[] result = emptyList.ToCsv(includeHeader: true).ToArray();
 
             // Assert
             Assert.AreEqual(1, result.Length); // Only the header row

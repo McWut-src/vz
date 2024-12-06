@@ -14,27 +14,6 @@ namespace vz.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void TestJsonWithNumbers()
-        {
-            List<int> numbers = [1, 2, 3];
-            Assert.AreEqual("[1,2,3]", numbers.ToJson());
-        }
-
-        [TestMethod]
-        public void TestJsonWithStrings()
-        {
-            List<string> strings = ["Hello", "World"];
-            Assert.AreEqual("[\"Hello\",\"World\"]", strings.ToJson());
-        }
-
-        [TestMethod]
-        public void TestJsonWithSpecialCharacters()
-        {
-            List<string> specialChars = ["He said, \"What's that?\"", "Back\\slash"];
-            Assert.AreEqual("[\"He said, \\\"What's that?\\\"\",\"Back\\\\slash\"]", specialChars.ToJson());
-        }
-
-        [TestMethod]
         public void TestJsonWithBooleans()
         {
             List<bool> booleans = [true, false];
@@ -45,7 +24,7 @@ namespace vz.UnitTest.Extensions
         public void TestJsonWithCustomObject()
         {
             List<Person> people = [new Person { Name = "Alice", Age = 29 }];
-            Assert.AreEqual("[{\"Name\":\"Alice\",\"Age\":29}]", people.ToJson());
+            Assert.AreEqual("[{\"Age\":29,\"Name\":\"Alice\"}]", people.ToJson());
         }
 
         [TestMethod]
@@ -63,11 +42,33 @@ namespace vz.UnitTest.Extensions
             Assert.AreEqual("[null]", peopleWithNull.ToJson());
         }
 
+        [TestMethod]
+        public void TestJsonWithNumbers()
+        {
+            List<int> numbers = [1, 2, 3];
+            Assert.AreEqual("[1,2,3]", numbers.ToJson());
+        }
+
+        [TestMethod]
+        public void TestJsonWithSpecialCharacters()
+        {
+            List<string> specialChars = ["He said, \"What's that?\"", "Back\\slash"];
+            Assert.AreEqual("[\"He said, \\\"What's that?\\\"\",\"Back\\\\slash\"]", specialChars.ToJson());
+        }
+
+        [TestMethod]
+        public void TestJsonWithStrings()
+        {
+            List<string> strings = ["Hello", "World"];
+            Assert.AreEqual("[\"Hello\",\"World\"]", strings.ToJson());
+        }
+
         // Helper class for testing complex objects
         private class Person
         {
-            public string? Name { get; set; }
             public int Age { get; set; }
+
+            public string? Name { get; set; }
         }
     }
 }

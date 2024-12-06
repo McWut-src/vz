@@ -8,14 +8,10 @@ namespace vz.Extensions
     /// </summary>
     public static class XmlExtensions
     {
-        /// <summary>
-        /// Converts an IEnumerable<T> to an XML string representation.
-        /// <typeparam name="T">The type of the elements in the source sequence.</typeparam>
-        /// <param name="source">The source IEnumerable to convert to XML.</param>
-        /// <returns>A string containing the XML representation of the source.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when source is null.</exception>
-        /// <exception cref="InvalidOperationException">Thrown when an element in the source cannot be converted to XML.</exception>
-        /// </summary>
+        /// <summary> Converts an IEnumerable<T> to an XML string representation. <typeparam name="T">The type of the elements in the source
+        /// sequence.</typeparam> <param name="source">The source IEnumerable to convert to XML.</param> <returns>A string containing the XML
+        /// representation of the source.</returns> <exception cref="ArgumentNullException">Thrown when source is null.</exception> <exception
+        /// cref="InvalidOperationException">Thrown when an element in the source cannot be converted to XML.</exception> </summary>
         public static string ToXml<T>(this IEnumerable<T> source)
         {
             if (source == null)
@@ -38,6 +34,7 @@ namespace vz.Extensions
                             try
                             {
                                 object? value = prop.GetValue(item);
+
                                 // Add the element even if it's null, but content will be empty string
                                 element.Add(new XElement(prop.Name, value?.ToString() ?? string.Empty));
                             }

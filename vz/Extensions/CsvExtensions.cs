@@ -4,13 +4,10 @@ namespace vz.Extensions
 {
     public static class CsvExtensions
     {
-        /// <summary>
-        /// Converts an IEnumerable<T> to an IEnumerable<string> where each string is a line in CSV format.
-        /// </summary>
-        /// <typeparam name="T">The type of elements in the collection.</typeparam>
-        /// <param name="source">The source collection to convert.</param>
-        /// <param name="includeHeader">Determines whether to include the header row. Defaults to true.</param>
-        /// <returns>An IEnumerable<string> where each string represents a line in CSV format.</returns>
+        /// <summary> Converts an IEnumerable<T> to an IEnumerable<string> where each string is a line in CSV format. </summary> <typeparam
+        /// name="T">The type of elements in the collection.</typeparam> <param name="source">The source collection to convert.</param> <param
+        /// name="includeHeader">Determines whether to include the header row. Defaults to true.</param> <returns>An IEnumerable<string> where each
+        /// string represents a line in CSV format.</returns>
         public static IEnumerable<string> ToCsv<T>(this IEnumerable<T> source, bool includeHeader = true)
         {
             ArgumentNullException.ThrowIfNull(source);
@@ -31,6 +28,7 @@ namespace vz.Extensions
                     .Select(p =>
                     {
                         string value = p.GetValue(item)?.ToString() ?? "";
+
                         // Escape commas and quotes
                         if (value.Contains(',') || value.Contains('"'))
                         {

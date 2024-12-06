@@ -7,31 +7,24 @@ namespace vz.UnitTest.Extensions
     [TestClass]
     public class EnumExtensionsTests
     {
-        private enum TestEnum
-        {
-            Value1,
-            Value2,
-            Value3
-        }
-
         [TestMethod]
-        public void In_ReturnsTrue_WhenValueIsInSet()
+        public void In_ReturnsFalse_WhenNoValuesProvided()
         {
             // Arrange
-            var value = TestEnum.Value2;
+            TestEnum value = TestEnum.Value1;
 
             // Act
-            bool result = value.In(TestEnum.Value1, TestEnum.Value2, TestEnum.Value3);
+            bool result = value.In();
 
             // Assert
-            Assert.IsTrue(result, "Expected In() to return true when the value is in the set.");
+            Assert.IsFalse(result, "Expected In() to return false when no values are provided.");
         }
 
         [TestMethod]
         public void In_ReturnsFalse_WhenValueIsNotInSet()
         {
             // Arrange
-            var value = TestEnum.Value1;
+            TestEnum value = TestEnum.Value1;
 
             // Act
             bool result = value.In(TestEnum.Value2, TestEnum.Value3);
@@ -41,16 +34,25 @@ namespace vz.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void In_ReturnsFalse_WhenNoValuesProvided()
+        public void In_ReturnsTrue_WhenValueIsInSet()
         {
             // Arrange
-            var value = TestEnum.Value1;
+            TestEnum value = TestEnum.Value2;
 
             // Act
-            bool result = value.In();
+            bool result = value.In(TestEnum.Value1, TestEnum.Value2, TestEnum.Value3);
 
             // Assert
-            Assert.IsFalse(result, "Expected In() to return false when no values are provided.");
+            Assert.IsTrue(result, "Expected In() to return true when the value is in the set.");
+        }
+
+        private enum TestEnum
+        {
+            Value1,
+
+            Value2,
+
+            Value3
         }
     }
 }

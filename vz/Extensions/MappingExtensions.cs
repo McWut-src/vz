@@ -8,18 +8,17 @@ namespace vz.Extensions
     public static class MappingExtensions
     {
         /// <summary>
-        /// Maps the properties of the source object to a new instance of the destination type.
-        /// Tries to map:
+        /// Maps the properties of the source object to a new instance of the destination type. Tries to map:
         /// 1. Properties with the same name and type (case-sensitive).
         /// 2. Properties with the same name and type (case-insensitive).
         /// 3. Properties with the same name (case-sensitive) where source can be converted to string.
         /// </summary>
-        /// <typeparam name="TSource">The type of the source object.</typeparam>
-        /// <typeparam name="TDest">The type of the destination object.</typeparam>
-        /// <param name="source">The source object to map from.</param>
-        /// <returns>An instance of <typeparamref name="TDest"/> with properties mapped from the source.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if source is null.</exception>
-        /// <exception cref="InvalidOperationException">Thrown if destination type cannot be instantiated.</exception>
+        /// <typeparam name="TSource"> The type of the source object. </typeparam>
+        /// <typeparam name="TDest"> The type of the destination object. </typeparam>
+        /// <param name="source"> The source object to map from. </param>
+        /// <returns> An instance of <typeparamref name="TDest" /> with properties mapped from the source. </returns>
+        /// <exception cref="ArgumentNullException"> Thrown if source is null. </exception>
+        /// <exception cref="InvalidOperationException"> Thrown if destination type cannot be instantiated. </exception>
         public static TDest MapTo<TSource, TDest>(this TSource source) where TDest : new() where TSource : class
         {
             if (source == null)
