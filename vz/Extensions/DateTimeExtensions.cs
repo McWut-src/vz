@@ -78,11 +78,20 @@
             return date.FirstDayOfWeek().AddDays(6);
         }
 
-        /// Extends DateTime with a method to safely append a timestamp to a filename for Windows file systems. If no filename is provided, it returns
-        /// a safe timestamp string that can be used as a filename. </summary> <param name="dateTime">The DateTime to convert.</param> <param
-        /// name="fileName">The optional filename to which the timestamp will be appended. If empty, only the timestamp is returned.</param>
-        /// <returns>A string representing either the filename with an appended timestamp or just the timestamp if fileName is empty.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when the filename provided is only whitespace.</exception>
+        /// <summary>
+        /// Generates a Windows-compatible file name by appending a timestamp to the provided file name or using the timestamp alone if no file name is provided.
+        /// </summary>
+        /// <param name="dateTime">The <see cref="DateTime"/> object from which to extract the timestamp.</param>
+        /// <param name="fileName">The original file name to modify. If empty or whitespace, the method uses only the timestamp.</param>
+        /// <returns>
+        /// A string formatted as a valid Windows file name. If <paramref name="fileName"/> is provided, it prefixes the timestamp.
+        /// The filename is adjusted to respect Windows path length restrictions (up to 260 characters).
+        /// </returns>
+        /// <remarks>
+        /// - Uses the format "yyyy-MM-dd_HH-mm-ss-fff" for the timestamp to ensure uniqueness.
+        /// - Handles cases where the input <paramref name="fileName"/> might be null or empty by returning just the timestamp.
+        /// - Truncates the <paramref name="fileName"/> if the resulting string would exceed Windows' filename character limit.
+        /// </remarks>
         public static string ToWindowsFileName(this DateTime dateTime, string fileName = "")
         {
             // Check if the filename consists only of whitespace

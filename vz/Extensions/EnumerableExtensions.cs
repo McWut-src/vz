@@ -27,10 +27,23 @@
                 .Select(x => x.Select(v => v.Value));
         }
 
-        /// <summary> Returns distinct elements from a sequence by using a specified key selector function. </summary> <typeparam name="TSource">The
-        /// type of the elements of source.</typeparam> <typeparam name="TKey">The type of key to identify distinct elements by.</typeparam> <param
-        /// name="source">The sequence to remove duplicates from.</param> <param name="keySelector">A function to extract the key for each
-        /// element.</param> <returns>An IEnumerable<TSource> that contains distinct elements from the source sequence.</returns>
+        /// <summary>
+        /// Returns a new sequence that contains only the first occurrence of each distinct key from the source sequence, based on the key selector
+        /// function provided.
+        /// </summary>
+        /// <typeparam name="TSource"> The type of the elements in the source sequence. </typeparam>
+        /// <typeparam name="TKey"> The type of the key returned by the selector function. </typeparam>
+        /// <param name="source"> An <see cref="IEnumerable{T}" /> to return distinct elements from. </param>
+        /// <param name="keySelector"> A function to extract the key for each element. </param>
+        /// <returns>
+        /// An <see cref="IEnumerable{T}" /> that contains distinct elements from the source sequence, where equality is determined by the key selector.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"> Thrown when either <paramref name="source" /> or <paramref name="keySelector" /> is null. </exception>
+        /// <remarks>
+        /// This method uses <see cref="Enumerable.GroupBy{TSource, TKey}(IEnumerable{TSource}, Func{TSource, TKey})" /> and <see
+        /// cref="Enumerable.Select{TSource, TResult}(IEnumerable{TSource}, Func{TSource, TResult})" /> to group elements by key and then select the
+        /// first element from each group, effectively removing duplicates based on the key.
+        /// </remarks>
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
         {
             ArgumentNullException.ThrowIfNull(source);
@@ -114,9 +127,22 @@
                          .FirstOrDefault();
         }
 
-        /// <summary> Returns an enumerable that contains the current element and all subsequent elements from the source sequence. </summary>
-        /// <typeparam name="T">The type of the elements of source.</typeparam> <param name="source">An IEnumerable<T> to return elements
-        /// from.</param> <returns>An IEnumerable<T> that contains the current element and all subsequent elements from the source sequence.</returns>
+        /// <summary>
+        /// Skips elements in the source sequence until the predicate returns true for an element, then returns all subsequent elements including the
+        /// element that matched the predicate.
+        /// </summary>
+        /// <typeparam name="T"> The type of the elements in the sequence. </typeparam>
+        /// <param name="source"> The sequence to filter. </param>
+        /// <param name="predicate"> A function to test each element for a condition. </param>
+        /// <returns>
+        /// An <see cref="IEnumerable{T}" /> containing all elements from the point where the predicate first returns true to the end of the sequence.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"> Thrown when either <paramref name="source" /> or <paramref name="predicate" /> is null. </exception>
+        /// <remarks>
+        /// - Once an element satisfies the predicate, all following elements will be yielded regardless of their value.
+        /// - If no element satisfies the predicate, the entire sequence is skipped.
+        /// - This method uses deferred execution to yield results.
+        /// </remarks>
         public static IEnumerable<T> SkipUntil<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
             ArgumentNullException.ThrowIfNull(source);
