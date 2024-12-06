@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace vz.Extensions
+﻿namespace vz.Extensions
 {
     using System;
     using System.IO;

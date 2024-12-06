@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace vz.Extensions
+﻿namespace vz.Extensions
 {
     using System.Text.RegularExpressions;
 
