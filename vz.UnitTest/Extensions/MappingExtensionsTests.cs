@@ -10,29 +10,29 @@ namespace vz.UnitTest.Extensions
         private class Source
         {
             public int Id { get; set; }
-            public string Name { get; set; }
+            public string? Name { get; set; }
             public double Value { get; set; }
-            public string Description { get; set; }
-            public string CaseInsensitive { get; set; }
-            public string ToStringProperty { get; set; }
+            public string? Description { get; set; }
+            public string? CaseInsensitive { get; set; }
+            public string? ToStringProperty { get; set; }
         }
 
         private class Destination
         {
             public int Id { get; set; }
-            public string Name { get; set; }
+            public string? Name { get; set; }
             public double Value { get; set; }
-            public string Description { get; set; }
-            public string CaseInsensitive { get; set; }
-            public string ToStringProperty { get; set; }
+            public string? Description { get; set; }
+            public string? CaseInsensitive { get; set; }
+            public string? ToStringProperty { get; set; }
         }
 
         private class PartialDestination
         {
-            public string Name { get; set; }
-            public string CaseInsensitive { get; set; }
-            public string ToStringProperty { get; set; }
-            public string NonMatchingProperty { get; set; }
+            public string? Name { get; set; }
+            public string? CaseInsensitive { get; set; }
+            public string? ToStringProperty { get; set; }
+            public string? NonMatchingProperty { get; set; }
         }
 
         [TestMethod]
@@ -108,10 +108,10 @@ namespace vz.UnitTest.Extensions
         public void MapTo_NullSource_ThrowsException()
         {
             // Arrange
-            Source source = null;
+            Source? source = null;
 
             // Act
-            source.MapTo<Source, Destination>();
+            _ = source.MapTo<Source, Destination>();
 
             // Assert is handled by ExpectedException
         }

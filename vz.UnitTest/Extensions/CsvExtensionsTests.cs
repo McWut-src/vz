@@ -66,7 +66,7 @@ namespace vz.UnitTest.Extensions
         public void ToCsv_WhenNullSource_ShouldThrowArgumentNullException()
         {
             // Arrange
-            IEnumerable<object> nullSource = null;
+            IEnumerable<object>? nullSource = null;
 
             // Act
             _ = nullSource.ToCsv().ToArray(); // Using _ to ignore result since we expect an exception

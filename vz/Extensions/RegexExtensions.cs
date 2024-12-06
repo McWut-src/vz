@@ -29,7 +29,7 @@
         /// <param name="pattern">The regular expression pattern to look for.</param>
         /// <param name="replacement">The string to replace the pattern with. If null, the pattern is removed.</param>
         /// <returns>A new string with the replacements made.</returns>
-        public static string ReplaceOrRemove(this string input, string pattern, string replacement = null)
+        public static string? ReplaceOrRemove(this string input, string pattern, string? replacement = null)
         {
             if (input == null) return null; // Preserve null input
 
@@ -73,7 +73,7 @@
         /// <param name="input">The string to clean.</param>
         /// <param name="pattern">The regular expression pattern to remove.</param>
         /// <returns>A new string with all instances of the pattern removed.</returns>
-        public static string RemoveMatches(this string input, string pattern)
+        public static string? RemoveMatches(this string input, string pattern)
         {
             if (input == null) return null; // Preserve null input
 

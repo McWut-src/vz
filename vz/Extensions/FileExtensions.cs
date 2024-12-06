@@ -16,7 +16,7 @@
         /// <param name="fileInfo">The file to read from.</param>
         /// <param name="encoding">The text encoding to use; if null, UTF-8 without BOM will be used.</param>
         /// <returns>An enumerable sequence of the file's lines.</returns>
-        public static IEnumerable<string> ReadLines(this FileInfo fileInfo, Encoding encoding = null)
+        public static IEnumerable<string> ReadLines(this FileInfo fileInfo, Encoding? encoding = null)
         {
             ArgumentNullException.ThrowIfNull(fileInfo);
 
@@ -24,7 +24,7 @@
                 ? new StreamReader(fileInfo.OpenRead())
                 : new StreamReader(fileInfo.OpenRead(), encoding);
 
-            string line;
+            string? line;
             while ((line = reader.ReadLine()) != null)
             {
                 yield return line;
@@ -37,7 +37,7 @@
         /// <param name="fileInfo">The file to read from.</param>
         /// <param name="encoding">The text encoding to use; if null, UTF-8 without BOM will be used.</param>
         /// <returns>An async enumerable sequence of the file's lines.</returns>
-        public static async IAsyncEnumerable<string> ReadLinesAsync(this FileInfo fileInfo, Encoding encoding = null)
+        public static async IAsyncEnumerable<string> ReadLinesAsync(this FileInfo fileInfo, Encoding? encoding = null)
         {
             ArgumentNullException.ThrowIfNull(fileInfo);
 
@@ -45,7 +45,7 @@
                 ? new StreamReader(fileInfo.OpenRead())
                 : new StreamReader(fileInfo.OpenRead(), encoding);
 
-            string line;
+            string? line;
             while ((line = await reader.ReadLineAsync()) != null)
             {
                 yield return line;
@@ -58,17 +58,15 @@
         /// <param name="fileInfo">The file to write to.</param>
         /// <param name="lines">The lines of text to write to the file.</param>
         /// <param name="encoding">The encoding to use when writing the file. If null, UTF-8 without BOM will be used.</param>
-        public static void WriteLines(this FileInfo fileInfo, IEnumerable<string> lines, Encoding encoding = null)
+        public static void WriteLines(this FileInfo fileInfo, IEnumerable<string> lines, Encoding? encoding = null)
         {
             ArgumentNullException.ThrowIfNull(fileInfo);
             ArgumentNullException.ThrowIfNull(lines);
 
-            using (var writer = new StreamWriter(fileInfo.FullName, false, encoding ?? Encoding.UTF8))
+            using var writer = new StreamWriter(fileInfo.FullName, false, encoding ?? Encoding.UTF8);
+            foreach (var line in lines)
             {
-                foreach (var line in lines)
-                {
-                    writer.WriteLine(line);
-                }
+                writer.WriteLine(line);
             }
         }
 
@@ -78,7 +76,7 @@
         /// <param name="fileInfo">The file to write to.</param>
         /// <param name="lines">An async enumerable sequence of lines to write to the file.</param>
         /// <param name="encoding">The encoding to use when writing the file. If null, UTF-8 without BOM will be used.</param>
-        public static async Task WriteLinesAsync(this FileInfo fileInfo, IAsyncEnumerable<string> lines, Encoding encoding = null)
+        public static async Task WriteLinesAsync(this FileInfo fileInfo, IAsyncEnumerable<string> lines, Encoding? encoding = null)
         {
             ArgumentNullException.ThrowIfNull(fileInfo);
             ArgumentNullException.ThrowIfNull(lines);

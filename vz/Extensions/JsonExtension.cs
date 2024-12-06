@@ -42,14 +42,14 @@ namespace vz.Extensions
                 else if (item is string)
                 {
                     // Escape the string for JSON to handle special characters
-                    itemJson = $"\"{item.ToString().Replace("\\", "\\\\").Replace("\"", "\\\"")}\"";
+                    itemJson = $"\"{item.ToString()?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\"";
                 }
                 else if (item is IConvertible)
                 {
                     // Convert to string representation, handle special cases for JSON format
                     if (item is bool)
                     {
-                        itemJson = item.ToString().ToLower();  // JSON uses lowercase for booleans
+                        itemJson = item.ToString()?.ToLower() ?? string.Empty;  // JSON uses lowercase for booleans
                     }
                     else if (item is float or double)
                     {
@@ -58,7 +58,7 @@ namespace vz.Extensions
                     }
                     else
                     {
-                        itemJson = item.ToString();  // For other convertible types
+                        itemJson = item.ToString() ?? string.Empty;  // For other convertible types
                     }
                 }
                 else
@@ -91,19 +91,19 @@ namespace vz.Extensions
             // Use LINQ to create a string for each property in JSON format
             var jsonProperties = properties.Select(prop =>
             {
-                object value = prop.GetValue(obj);
+                object? value = prop.GetValue(obj) ?? null;
                 string? valueJson;  // Default string conversion
                 if (value is string)
                 {
                     valueJson = value == null ? "null" :  // Handle null property values
-                                   (string?)$"\"{value.ToString().Replace("\\", "\\\\").Replace("\"", "\\\"")}\"";
+                                   (string?)$"\"{value.ToString()?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\"";
                 }
                 else
                 {
                     if (value is bool)
                     {
                         valueJson = value == null ? "null" :  // Handle null property values
-                                   value.ToString().ToLower() as string;
+                                   value.ToString()?.ToLower() ?? string.Empty as string;
                     }
                     else
                     {

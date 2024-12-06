@@ -52,8 +52,8 @@ namespace vz.UnitTest.Extensions
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestJsonWithNullCollection()
         {
-            List<int> nullList = null;
-            nullList.ToJson(); // Should throw an ArgumentNullException
+            List<int>? nullList = null;
+            _ = nullList.ToJson(); // Should throw an ArgumentNullException
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace vz.UnitTest.Extensions
         // Helper class for testing complex objects
         private class Person
         {
-            public string Name { get; set; }
+            public string? Name { get; set; }
             public int Age { get; set; }
         }
     }

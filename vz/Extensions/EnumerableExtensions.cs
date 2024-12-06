@@ -16,12 +16,13 @@
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="source">The source sequence to analyze.</param>
         /// <returns>The item with the highest frequency, or default(T) if the source is empty.</returns>
-        public static T Mode<T>(this IEnumerable<T> source)
+        public static T? Mode<T>(this IEnumerable<T> source)
         {
             ArgumentNullException.ThrowIfNull(source);
-
-            var groups = source.GroupBy(i => i);
-            return groups.OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).FirstOrDefault();
+            return source.GroupBy(i => i)
+                         .OrderByDescending(grp => grp.Count())
+                         .Select(grp => grp.Key)
+                         .FirstOrDefault();
         }
 
         /// <summary>

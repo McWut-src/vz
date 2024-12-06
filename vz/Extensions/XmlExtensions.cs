@@ -37,7 +37,7 @@ namespace vz.Extensions
                         {
                             try
                             {
-                                object value = prop.GetValue(item);
+                                object? value = prop.GetValue(item);
                                 // Add the element even if it's null, but content will be empty string
                                 element.Add(new XElement(prop.Name, value?.ToString() ?? string.Empty));
                             }

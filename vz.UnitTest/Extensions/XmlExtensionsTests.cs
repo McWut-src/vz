@@ -37,8 +37,8 @@ namespace vz.UnitTest.Extensions
         public void ToXml_NullSource_ThrowsArgumentNullException()
         {
             // Arrange & Act
-            IEnumerable<TestClass> nullItems = null;
-            nullItems.ToXml();
+            IEnumerable<TestClass>? nullItems = null;
+            _ = nullItems.ToXml();
 
             // Assert will check for the exception
         }
@@ -84,7 +84,7 @@ namespace vz.UnitTest.Extensions
         private class TestClass
         {
             public int Id { get; set; }
-            public string Name { get; set; }
+            public string? Name { get; set; }
         }
     }
 }

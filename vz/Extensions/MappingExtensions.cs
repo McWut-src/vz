@@ -34,7 +34,7 @@ namespace vz.Extensions
             {
                 if (!destProp.CanWrite) continue;
 
-                PropertyInfo sourceProp = sourceType.GetProperty(destProp.Name, BindingFlags.Public | BindingFlags.Instance);
+                PropertyInfo? sourceProp = sourceType.GetProperty(destProp.Name, BindingFlags.Public | BindingFlags.Instance);
                 if (sourceProp != null && sourceProp.CanRead && sourceProp.PropertyType == destProp.PropertyType)
                 {
                     destProp.SetValue(destination, sourceProp.GetValue(source));
@@ -46,7 +46,7 @@ namespace vz.Extensions
             {
                 if (!destProp.CanWrite || destProp.GetValue(destination) != null) continue;
 
-                PropertyInfo sourceProp = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                PropertyInfo? sourceProp = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                     .FirstOrDefault(p => p.Name.Equals(destProp.Name, StringComparison.OrdinalIgnoreCase) &&
                                          p.PropertyType == destProp.PropertyType);
 
@@ -61,10 +61,10 @@ namespace vz.Extensions
             {
                 if (!destProp.CanWrite || destProp.GetValue(destination) != null || destProp.PropertyType != typeof(string)) continue;
 
-                PropertyInfo sourceProp = sourceType.GetProperty(destProp.Name, BindingFlags.Public | BindingFlags.Instance);
+                PropertyInfo? sourceProp = sourceType.GetProperty(destProp.Name, BindingFlags.Public | BindingFlags.Instance);
                 if (sourceProp != null && sourceProp.CanRead)
                 {
-                    object value = sourceProp.GetValue(source);
+                    object? value = sourceProp.GetValue(source) ?? null;
                     destProp.SetValue(destination, value?.ToString());
                 }
             }
@@ -74,12 +74,12 @@ namespace vz.Extensions
             {
                 if (!destProp.CanWrite || destProp.GetValue(destination) != null || destProp.PropertyType != typeof(string)) continue;
 
-                PropertyInfo sourceProp = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                PropertyInfo? sourceProp = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                     .FirstOrDefault(p => p.Name.Equals(destProp.Name, StringComparison.OrdinalIgnoreCase));
 
                 if (sourceProp != null && sourceProp.CanRead)
                 {
-                    object value = sourceProp.GetValue(source);
+                    object? value = sourceProp.GetValue(source);
                     destProp.SetValue(destination, value?.ToString());
                 }
             }
