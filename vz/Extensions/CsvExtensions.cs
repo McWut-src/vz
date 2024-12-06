@@ -16,7 +16,7 @@ namespace vz.Extensions
             ArgumentNullException.ThrowIfNull(source);
 
             // Get the properties of T to use as headers
-            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             // Yield the header row if includeHeader is true
             if (includeHeader)
@@ -25,12 +25,12 @@ namespace vz.Extensions
             }
 
             // Yield data rows
-            foreach (var item in source)
+            foreach (T? item in source)
             {
-                var values = properties
+                List<string> values = properties
                     .Select(p =>
                     {
-                        var value = p.GetValue(item)?.ToString() ?? "";
+                        string value = p.GetValue(item)?.ToString() ?? "";
                         // Escape commas and quotes
                         if (value.Contains(',') || value.Contains('"'))
                         {

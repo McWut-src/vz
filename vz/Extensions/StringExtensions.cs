@@ -101,7 +101,7 @@ namespace vz.Extensions
                 return value;
 
             string normalizedString = value.Normalize(NormalizationForm.FormD);
-            var stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
 
             foreach (char c in normalizedString)
             {

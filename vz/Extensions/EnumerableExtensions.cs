@@ -35,7 +35,7 @@
             if (source == null || !source.Any())
                 throw new ArgumentException("Source cannot be null or empty");
 
-            var sorted = source.OrderBy(n => n).ToList();
+            List<double> sorted = source.OrderBy(n => n).ToList();
             int count = sorted.Count;
             if (count % 2 == 0)
                 return (sorted[count / 2 - 1] + sorted[count / 2]) / 2;
@@ -89,7 +89,7 @@
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(action);
 
-            foreach (var element in source)
+            foreach (T? element in source)
             {
                 action(element);
                 yield return element;

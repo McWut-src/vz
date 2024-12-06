@@ -27,13 +27,13 @@ namespace vz.Extensions
             {
                 XElement root = new XElement("root");
 
-                foreach (var item in source)
+                foreach (T? item in source)
                 {
                     XElement element = new XElement(typeof(T).Name ?? "Item");
 
                     if (item != null)
                     {
-                        foreach (var prop in typeof(T).GetProperties())
+                        foreach (System.Reflection.PropertyInfo prop in typeof(T).GetProperties())
                         {
                             try
                             {

@@ -89,7 +89,7 @@ namespace vz.Extensions
             if (properties.Length == 0) return "{}";
 
             // Use LINQ to create a string for each property in JSON format
-            var jsonProperties = properties.Select(prop =>
+            IEnumerable<string> jsonProperties = properties.Select(prop =>
             {
                 object? value = prop.GetValue(obj) ?? null;
                 string? valueJson;  // Default string conversion

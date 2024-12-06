@@ -20,7 +20,7 @@
         {
             ArgumentNullException.ThrowIfNull(fileInfo);
 
-            using var reader = encoding == null
+            using StreamReader reader = encoding == null
                 ? new StreamReader(fileInfo.OpenRead())
                 : new StreamReader(fileInfo.OpenRead(), encoding);
 
@@ -41,7 +41,7 @@
         {
             ArgumentNullException.ThrowIfNull(fileInfo);
 
-            using var reader = encoding == null
+            using StreamReader reader = encoding == null
                 ? new StreamReader(fileInfo.OpenRead())
                 : new StreamReader(fileInfo.OpenRead(), encoding);
 
@@ -63,8 +63,8 @@
             ArgumentNullException.ThrowIfNull(fileInfo);
             ArgumentNullException.ThrowIfNull(lines);
 
-            using var writer = new StreamWriter(fileInfo.FullName, false, encoding ?? Encoding.UTF8);
-            foreach (var line in lines)
+            using StreamWriter writer = new StreamWriter(fileInfo.FullName, false, encoding ?? Encoding.UTF8);
+            foreach (string line in lines)
             {
                 writer.WriteLine(line);
             }
@@ -81,9 +81,9 @@
             ArgumentNullException.ThrowIfNull(fileInfo);
             ArgumentNullException.ThrowIfNull(lines);
 
-            using (var writer = new StreamWriter(fileInfo.FullName, false, encoding ?? Encoding.UTF8))
+            using (StreamWriter writer = new StreamWriter(fileInfo.FullName, false, encoding ?? Encoding.UTF8))
             {
-                await foreach (var line in lines)
+                await foreach (string line in lines)
                 {
                     await writer.WriteLineAsync(line);
                 }

@@ -18,7 +18,7 @@
         {
             if (input == null) return defaultValue; // Handle null input
 
-            var match = Regex.Match(input, pattern);
+            Match match = Regex.Match(input, pattern);
             return match.Success ? match.Value : defaultValue;
         }
 
