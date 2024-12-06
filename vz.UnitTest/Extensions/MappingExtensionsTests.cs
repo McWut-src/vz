@@ -1,6 +1,6 @@
-﻿using Extensions;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using vz.Extensions;
 
 namespace vz.UnitTest.Extensions
 {
